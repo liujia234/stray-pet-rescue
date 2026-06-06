@@ -80,6 +80,10 @@
       </view>
       <text class="text-primary">{{hasApiKey ? '✅ 已配置' : '⚙️ 去配置'}}</text>
     </view>
+    <view class="flex-row mt-sm" style="gap: 16rpx;" wx:if="{{hasApiKey}}">
+      <view class="btn-sm btn-outline flex-1 text-center" bindtap="testApiKey">🧪 测试连接</view>
+      <view class="btn-sm btn-outline flex-1 text-center" style="color:#FF4D4F;border-color:#FF4D4F;" bindtap="clearApiKey">🗑️ 清除Key</view>
+    </view>
   </view>
 
   <view style="height: 120rpx;"></view>

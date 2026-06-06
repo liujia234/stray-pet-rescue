@@ -3,18 +3,19 @@
   "packOptions": {
     "ignore": [
       {
-        "type": "file",
-        "value": ".git"
+        "value": ".git",
+        "type": "file"
       },
       {
-        "type": "file",
-        "value": "README.md"
+        "value": "README.md",
+        "type": "file"
       },
       {
-        "type": "file",
-        "value": ".gitignore"
+        "value": ".gitignore",
+        "type": "file"
       }
-    ]
+    ],
+    "include": []
   },
   "setting": {
     "urlCheck": false,
@@ -43,12 +44,23 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "condition": false
+    "condition": false,
+    "compileWorklet": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.5.0",
-  "appid": "",
+  "appid": "wx34fd70fcb159553f",
   "projectname": "stray-pet-rescue",
   "condition": {},
-  "simulatorPluginLibVersion": {}
+  "simulatorPluginLibVersion": {},
+  "editorSetting": {}
 }

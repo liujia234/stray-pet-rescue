@@ -75,8 +75,9 @@ Page({
           result = await aiApi.generateVideoScript(pet, textType)
         } catch (aiErr) {
           console.log('AI 调用失败，降级到模板:', aiErr.message)
-          // 降级到本地模板
+          // 降级到本地模板，同时记录失败原因
           result = templateText.generateWithTemplate(pet, textType)
+          result._fallbackReason = aiErr.message || '未知错误'
         }
       } else {
         // 没有 API Key，直接使用模板

@@ -15,7 +15,10 @@
     <!-- 数据来源标记 -->
     <view class="source-badge">
       <text class="tag {{result._source === 'ai' ? 'tag-success' : 'tag-warning'}}">
-        {{result._source === 'ai' ? '🤖 AI智能生成' : '📋 模板生成（AI未配置或调用失败）'}}
+        {{result._source === 'ai' ? '🤖 AI智能生成' : '📋 模板生成'}}
+      </text>
+      <text wx:if="{{result._fallbackReason}}" class="fallback-reason text-sm text-secondary" style="display:block;margin-top:8rpx;">
+        ⚠️ AI调用失败原因：{{result._fallbackReason}}
       </text>
     </view>
 

@@ -50,7 +50,7 @@ function generateVideoScript(petInfo, textType = 'search') {
     const prompt = buildPrompt(petInfo, textType)
 
     wx.request({
-      url: `${API_CONFIG.baseUrl}/chat/completions`,
+      url: `${API_CONFIG.baseUrl}/v1/chat/completions`,
       method: 'POST',
       timeout: API_CONFIG.timeout,
       header: {
