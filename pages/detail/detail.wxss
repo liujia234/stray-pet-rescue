@@ -1,0 +1,144 @@
+/* 图片轮播 */
+.image-swiper {
+  width: 100%;
+  height: 500rpx;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+}
+.swiper-image {
+  width: 100%;
+  height: 100%;
+}
+.image-placeholder {
+  width: 100%;
+  height: 400rpx;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+.placeholder-icon {
+  font-size: 100rpx;
+}
+.placeholder-text {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  margin-top: 8rpx;
+}
+
+/* 信息区 */
+.info-section {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+.pet-name {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+}
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1rpx solid var(--color-border);
+  padding-top: var(--spacing-sm);
+}
+.info-item {
+  width: 33.33%;
+  margin-bottom: var(--spacing-sm);
+}
+.info-label {
+  display: block;
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+}
+.info-value {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-text);
+}
+.injury-badge {
+  background: #FFF0EB;
+  padding: 12rpx 16rpx;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+}
+
+/* 各 Section */
+.desc-section,
+.location-section,
+.contact-section,
+.shelter-section,
+.message-section {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+.section-label {
+  font-size: var(--font-md);
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+}
+.desc-text {
+  font-size: var(--font-md);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+.location-text {
+  font-size: var(--font-md);
+  color: var(--color-text);
+}
+.contact-phone {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 2rpx;
+}
+.contact-tip {
+  line-height: 1.6;
+}
+
+/* 留言 */
+.message-list {
+  margin-bottom: var(--spacing-sm);
+}
+.message-item {
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid var(--color-border);
+}
+.message-user {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.message-content {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  margin-left: 8rpx;
+}
+.message-time {
+  display: block;
+  margin-top: 4rpx;
+}
+.message-input-row {
+  gap: var(--spacing-sm);
+}
+.btn-send {
+  width: 120rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--font-sm);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+/* 操作区 */
+.action-section {
+  margin: var(--spacing-lg) 0;
+}

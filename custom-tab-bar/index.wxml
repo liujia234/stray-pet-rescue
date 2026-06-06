@@ -1,0 +1,15 @@
+<!-- 自定义 TabBar - 使用 emoji 图标 -->
+<view class="tab-bar safe-bottom">
+  <view
+    wx:for="{{list}}"
+    wx:key="index"
+    class="tab-item {{selected === index ? 'active' : ''}}"
+    data-path="{{item.pagePath}}"
+    data-index="{{index}}"
+    bindtap="switchTab"
+  >
+    <text class="tab-icon">{{item.icon}}</text>
+    <text class="tab-text">{{item.text}}</text>
+    <view class="tab-badge" wx:if="{{item.badge > 0}}">{{item.badge}}</view>
+  </view>
+</view>

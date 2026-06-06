@@ -1,0 +1,102 @@
+/* 搜索栏 */
+.search-bar {
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--spacing-md);
+  height: 72rpx;
+  box-shadow: var(--shadow-card);
+}
+.search-icon {
+  font-size: var(--font-md);
+  margin-right: 8rpx;
+}
+.search-input {
+  flex: 1;
+  font-size: var(--font-md);
+  height: 100%;
+}
+.filter-btn {
+  width: 120rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  box-shadow: var(--shadow-card);
+}
+.filter-btn.active {
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 筛选面板 */
+.filter-panel {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+.filter-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+.filter-row:last-child {
+  margin-bottom: 0;
+}
+.filter-label {
+  width: 80rpx;
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+  margin-top: 6rpx;
+}
+.filter-options {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+.filter-tag {
+  padding: 8rpx 24rpx;
+  background: var(--color-bg);
+  border-radius: 20rpx;
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  transition: all 0.3s;
+}
+.filter-tag.active {
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* 操作条 */
+.action-bar {
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+/* 卡片操作区 */
+.card-actions-row {
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--color-border);
+}
+.action-btn {
+  padding: 12rpx 24rpx;
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+}
+
+/* API Key 卡片 */
+.api-key-card {
+  padding: var(--spacing-md);
+}

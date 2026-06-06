@@ -1,0 +1,103 @@
+/* 已登录 */
+.welcome-card {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: linear-gradient(135deg, #EDF8EE, #FFF5F0);
+}
+.welcome-icon {
+  font-size: 72rpx;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+.welcome-name {
+  font-size: var(--font-xl);
+  font-weight: 700;
+}
+
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+.menu-item {
+  width: calc(50% - 8rpx);
+  background: var(--color-card-bg);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+.menu-icon {
+  font-size: 44rpx;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.menu-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  display: block;
+}
+.menu-desc {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+  margin-top: 4rpx;
+  display: block;
+}
+
+/* 快捷统计 */
+.quick-stats {
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+.stats-grid {
+  display: flex;
+}
+.q-stat {
+  flex: 1;
+  text-align: center;
+}
+.q-num {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.q-label {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+  display: block;
+  margin-top: 4rpx;
+}
+
+/* 未登录 */
+.login-area {
+  padding-top: var(--spacing-xl);
+}
+.login-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+.login-icon {
+  font-size: 100rpx;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+.login-title {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  display: block;
+}
+.login-desc {
+  font-size: var(--font-sm);
+  margin-top: 8rpx;
+  display: block;
+}
+.login-form {
+  padding: var(--spacing-lg);
+}
+.login-hint {
+  line-height: 1.6;
+}
+.user-entry {
+  padding: var(--spacing-md);
+}

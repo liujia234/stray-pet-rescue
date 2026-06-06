@@ -1,0 +1,137 @@
+/* 上报表单样式 */
+.tab-switch {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+.tab-option {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-md);
+  color: var(--color-text-secondary);
+  transition: all 0.3s;
+}
+.tab-option.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: #fff;
+  font-weight: 600;
+}
+
+.form-card {
+  padding-top: var(--spacing-lg);
+}
+
+/* 单选 */
+.radio-item {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 28rpx;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 2rpx solid transparent;
+  font-size: var(--font-md);
+  transition: all 0.3s;
+}
+.radio-item.active {
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.radio-icon {
+  margin-right: 8rpx;
+}
+.radio-sm {
+  padding: 10rpx 24rpx;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-sm);
+  border: 2rpx solid transparent;
+}
+.radio-sm.active {
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.form-row {
+  display: flex;
+}
+.char-count {
+  text-align: right;
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+  margin-top: 4rpx;
+}
+.address-input-row {
+  gap: var(--spacing-sm);
+}
+.btn-location {
+  width: 80rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-bg);
+  border-radius: var(--radius-md);
+  font-size: 36rpx;
+  flex-shrink: 0;
+}
+
+/* 图片上传 */
+.image-upload-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+.image-item {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.uploaded-image {
+  width: 100%;
+  height: 100%;
+}
+.image-remove {
+  position: absolute;
+  top: 4rpx;
+  right: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 22rpx;
+}
+.image-add-btn {
+  width: 160rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+.add-icon-plus {
+  font-size: 52rpx;
+  color: var(--color-text-light);
+  line-height: 1;
+}
+.add-label {
+  font-size: var(--font-xs);
+  color: var(--color-text-light);
+  margin-top: 4rpx;
+}
+
+.submit-area {
+  margin-top: var(--spacing-lg);
+}

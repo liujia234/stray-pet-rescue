@@ -1,0 +1,96 @@
+<!-- 救助站登录页 / 首页 -->
+<navbar title="救助站" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 已登录状态 -->
+  <block wx:if="{{isLoggedIn}}">
+    <view class="welcome-card card">
+      <text class="welcome-icon">🏥</text>
+      <text class="welcome-name">{{shelter.name}}</text>
+      <text class="text-sm text-secondary" style="display:block;margin-top:8rpx;">{{shelter.address}}</text>
+    </view>
+
+    <!-- 功能入口 -->
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="goDashboard">
+        <text class="menu-icon">📊</text>
+        <text class="menu-title">数据看板</text>
+        <text class="menu-desc">查看上报数据统计</text>
+      </view>
+      <view class="menu-item" bindtap="goManage">
+        <text class="menu-icon">🐾</text>
+        <text class="menu-title">宠物管理</text>
+        <text class="menu-desc">新增/编辑/下架宠物</text>
+      </view>
+      <view class="menu-item" bindtap="goActivity">
+        <text class="menu-icon">📢</text>
+        <text class="menu-title">发布活动</text>
+        <text class="menu-desc">救助活动/募捐公告</text>
+      </view>
+      <view class="menu-item" bindtap="goAllReports">
+        <text class="menu-icon">📋</text>
+        <text class="menu-title">全部上报</text>
+        <text class="menu-desc">用户寻宠/拾宠数据</text>
+      </view>
+    </view>
+
+    <!-- 快捷统计 -->
+    <view class="quick-stats card">
+      <text class="section-title mb-md">📈 平台数据概览</text>
+      <view class="stats-grid">
+        <view class="q-stat">
+          <text class="q-num">{{stats.lostCount}}</text>
+          <text class="q-label">寻宠中</text>
+        </view>
+        <view class="q-stat">
+          <text class="q-num">{{stats.foundCount}}</text>
+          <text class="q-label">已救助</text>
+        </view>
+        <view class="q-stat">
+          <text class="q-num">{{stats.adoptCount}}</text>
+          <text class="q-label">待领养</text>
+        </view>
+        <view class="q-stat">
+          <text class="q-num">{{stats.activityCount}}</text>
+          <text class="q-label">活动/公告</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="btn-outline mt-lg" bindtap="logout">退出登录</button>
+  </block>
+
+  <!-- 未登录状态 -->
+  <block wx:else>
+    <view class="login-area">
+      <view class="login-header">
+        <text class="login-icon">🏥</text>
+        <text class="login-title">救助机构登录</text>
+        <text class="login-desc text-secondary">仅限救助机构账号登录管理</text>
+      </view>
+
+      <view class="login-form card">
+        <view class="form-group">
+          <text class="form-label">账号</text>
+          <input class="form-input" placeholder="请输入账号" value="{{username}}" bindinput="onInput" data-field="username" />
+        </view>
+        <view class="form-group">
+          <text class="form-label">密码</text>
+          <input class="form-input" type="password" placeholder="请输入密码" value="{{password}}" bindinput="onInput" data-field="password" />
+        </view>
+        <button class="btn-primary" bindtap="doLogin">登 录</button>
+        <text class="login-hint text-light text-sm text-center mt-sm" style="display:block;">
+          演示账号：admin / 123456
+        </text>
+      </view>
+
+      <!-- 普通用户入口 -->
+      <view class="user-entry mt-lg text-center">
+        <text class="text-light text-sm">我是普通用户，想</text>
+        <text class="text-primary text-sm" bindtap="goReport">上报寻宠/拾宠 ›</text>
+      </view>
+    </view>
+  </block>
+
+  <view style="height: 120rpx;"></view>
+</scroll-view>

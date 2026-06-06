@@ -1,0 +1,97 @@
+<!-- 领养申请表 -->
+<navbar title="领养申请" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="form-desc card">
+    <text class="form-desc-title">💕 领养须知</text>
+    <text class="form-desc-text text-sm text-secondary">填写以下信息后，系统将智能匹配最适合您的待领养宠物。领养是无偿的爱心行为，请认真对待每一个生命。</text>
+  </view>
+
+  <view class="card form-card">
+    <!-- 居住城市 -->
+    <view class="form-group">
+      <text class="form-label">居住城市<text class="required">*</text></text>
+      <input class="form-input" placeholder="请输入您所在的城市" value="{{form.city}}" bindinput="onInput" data-field="city" />
+    </view>
+
+    <!-- 住房类型 -->
+    <view class="form-group">
+      <text class="form-label">住房类型<text class="required">*</text></text>
+      <view class="form-radio-group">
+        <view class="radio-item {{form.housingType === 'own' ? 'active' : ''}}" bindtap="setField" data-field="housingType" data-value="own">
+          <text>🏠 自有住房</text>
+        </view>
+        <view class="radio-item {{form.housingType === 'rent' ? 'active' : ''}}" bindtap="setField" data-field="housingType" data-value="rent">
+          <text>🏢 租房</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 养宠经验 -->
+    <view class="form-group">
+      <text class="form-label">养宠经验<text class="required">*</text></text>
+      <view class="form-radio-group">
+        <view class="radio-item {{form.hasExperience === 'yes' ? 'active' : ''}}" bindtap="setField" data-field="hasExperience" data-value="yes">
+          <text>✅ 有过养宠经验</text>
+        </view>
+        <view class="radio-item {{form.hasExperience === 'no' ? 'active' : ''}}" bindtap="setField" data-field="hasExperience" data-value="no">
+          <text>❓ 新手</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 可饲养空间 -->
+    <view class="form-group">
+      <text class="form-label">可饲养空间</text>
+      <input class="form-input" placeholder="如：有小院子 / 公寓阳台 / 室内..." value="{{form.space}}" bindinput="onInput" data-field="space" />
+    </view>
+
+    <!-- 生活方式 -->
+    <view class="form-group">
+      <text class="form-label">生活方式（多选）</text>
+      <view class="form-radio-group">
+        <view class="check-item {{form.lifestyle.includes('quiet') ? 'active' : ''}}" bindtap="toggleLifestyle" data-value="quiet">
+          <text>😴 安静宅家</text>
+        </view>
+        <view class="check-item {{form.lifestyle.includes('active') ? 'active' : ''}}" bindtap="toggleLifestyle" data-value="active">
+          <text>🏃 户外活跃</text>
+        </view>
+        <view class="check-item {{form.lifestyle.includes('company') ? 'active' : ''}}" bindtap="toggleLifestyle" data-value="company">
+          <text>🤗 需要陪伴</text>
+        </view>
+        <view class="check-item {{form.lifestyle.includes('newbie') ? 'active' : ''}}" bindtap="toggleLifestyle" data-value="newbie">
+          <text>🌱 新手友好</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 偏好宠物类型 -->
+    <view class="form-group">
+      <text class="form-label">偏好宠物类型</text>
+      <view class="form-radio-group">
+        <view class="radio-item {{form.preferType === 'all' ? 'active' : ''}}" bindtap="setField" data-field="preferType" data-value="all">
+          <text>🐾 不限</text>
+        </view>
+        <view class="radio-item {{form.preferType === 'dog' ? 'active' : ''}}" bindtap="setField" data-field="preferType" data-value="dog">
+          <text>🐶 狗狗</text>
+        </view>
+        <view class="radio-item {{form.preferType === 'cat' ? 'active' : ''}}" bindtap="setField" data-field="preferType" data-value="cat">
+          <text>🐱 猫咪</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 偏好品种 -->
+    <view class="form-group">
+      <text class="form-label">偏好品种</text>
+      <input class="form-input" placeholder="如：金毛、英短、不限品种..." value="{{form.preferBreed}}" bindinput="onInput" data-field="preferBreed" />
+    </view>
+  </view>
+
+  <!-- 提交 -->
+  <view class="submit-area">
+    <button class="btn-primary" bindtap="onSubmit">开始智能匹配</button>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+</scroll-view>

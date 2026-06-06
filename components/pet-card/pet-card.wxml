@@ -1,0 +1,60 @@
+<!-- 宠物卡片组件 - 用于寻宠/拾宠/领养列表 -->
+<view class="pet-card card" bindtap="onCardTap">
+  <!-- 状态标签 -->
+  <view class="card-status">
+    <text class="tag {{statusConfig.class}}">{{statusConfig.text}}</text>
+    <text class="card-type-tag" wx:if="{{showType}}">{{typeName}}</text>
+  </view>
+
+  <!-- 图片区域 -->
+  <view class="card-image-area">
+    <view wx:if="{{images.length > 0}}" class="card-images">
+      <image
+        wx:for="{{images}}"
+        wx:key="index"
+        wx:if="{{index < 3}}"
+        src="{{item}}"
+        mode="aspectFill"
+        class="card-image {{images.length === 1 ? 'single' : ''}}"
+      />
+      <view wx:if="{{images.length > 3}}" class="image-more">+{{images.length - 3}}</view>
+    </view>
+    <view wx:else class="card-image-placeholder" style="background: {{placeholderColor}};">
+      <text class="placeholder-icon">{{petType === 'cat' ? '🐱' : '🐶'}}</text>
+      <text class="placeholder-text">暂无照片</text>
+    </view>
+  </view>
+
+  <!-- 信息区域 -->
+  <view class="card-info">
+    <view class="card-title-row flex-between">
+      <text class="card-name">{{name || '未命名'}}</text>
+      <text class="card-gender">{{genderName}}</text>
+    </view>
+
+    <view class="card-tags flex-row flex-wrap">
+      <text class="tag tag-primary">{{breed || '未知品种'}}</text>
+      <text class="tag tag-info" wx:if="{{color}}">{{color}}</text>
+      <text class="tag tag-warning">{{age || '未知年龄'}}</text>
+    </view>
+
+    <view class="card-desc text-secondary text-sm" wx:if="{{description}}">
+      {{description.length > 80 ? description.substring(0, 80) + '...' : description}}
+    </view>
+
+    <view class="card-footer flex-between mt-sm">
+      <view class="card-address flex-row">
+        <text class="address-icon">📍</text>
+        <text class="address-text text-light text-sm">{{address || '未知地点'}}</text>
+      </view>
+      <view class="card-time text-light text-sm" wx:if="{{createTime}}">
+        {{timeText}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮区（可选） -->
+  <view class="card-actions" wx:if="{{showActions}}">
+    <slot name="actions"></slot>
+  </view>
+</view>

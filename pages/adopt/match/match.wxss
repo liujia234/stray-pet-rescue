@@ -1,0 +1,51 @@
+.match-summary {
+  padding: var(--spacing-md);
+}
+.summary-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+.summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+
+/* 匹配进度条 */
+.match-item {
+  margin-bottom: var(--spacing-md);
+}
+.match-score-bar {
+  position: relative;
+  height: 44rpx;
+  background: var(--color-bg);
+  border-radius: 22rpx;
+  margin-bottom: var(--spacing-sm);
+  overflow: hidden;
+}
+.score-fill {
+  height: 100%;
+  border-radius: 22rpx;
+  transition: width 0.8s ease;
+}
+.score-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card-actions-row {
+  padding-top: var(--spacing-sm);
+  border-top: 1rpx solid var(--color-border);
+}
+.action-btn {
+  padding: 12rpx 24rpx;
+  font-size: var(--font-sm);
+  color: var(--color-primary);
+}

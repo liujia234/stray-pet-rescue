@@ -1,0 +1,75 @@
+<!-- 救助活动 & 公告管理 -->
+<navbar title="活动 & 公告" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 发布按钮 -->
+  <view class="act-header flex-between mb-md">
+    <text class="text-md text-bold">共 {{activities.length}} 条公告</text>
+    <view class="btn-add-pet flex-row" bindtap="showPublish">
+      <text class="add-icon-sm">+</text>
+      <text>发布新公告</text>
+    </view>
+  </view>
+
+  <!-- 活动列表 -->
+  <view wx:if="{{activities.length > 0}}">
+    <view wx:for="{{activities}}" wx:key="id" class="activity-item card">
+      <view class="flex-between mb-sm">
+        <view class="flex-row">
+          <text class="tag {{item.type === 'activity' ? 'tag-success' : 'tag-warning'}}">
+            {{item.type === 'activity' ? '线下活动' : '公益募捐'}}
+          </text>
+        </view>
+        <text class="text-light text-sm">{{item.timeText}}</text>
+      </view>
+      <text class="act-title">{{item.title}}</text>
+      <text class="act-content text-sm text-secondary">{{item.content.substring(0, 150)}}{{item.content.length > 150 ? '...' : ''}}</text>
+      <view class="act-footer flex-between mt-sm">
+        <text class="text-light text-sm">{{item.shelterName}}</text>
+        <view class="act-delete" bindtap="deleteActivity" data-id="{{item.id}}">
+          <text class="text-sm">🗑️ 删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="empty-state">
+    <text class="empty-icon">📢</text>
+    <text class="empty-text">暂无活动公告</text>
+  </view>
+
+  <view style="height: 200rpx;"></view>
+</scroll-view>
+
+<!-- 发布弹窗 -->
+<view class="modal-mask" wx:if="{{showPublishModal}}" bindtap="closePublish">
+  <view class="modal-content" catchtap="">
+    <text class="modal-title">发布新公告</text>
+
+    <scroll-view class="modal-body" scroll-y>
+      <view class="form-group">
+        <text class="form-label">类型</text>
+        <view class="form-radio-group">
+          <view class="radio-item {{pubForm.type === 'activity' ? 'active' : ''}}" bindtap="setPubField" data-field="type" data-value="activity">
+            📢 线下活动
+          </view>
+          <view class="radio-item {{pubForm.type === 'donation' ? 'active' : ''}}" bindtap="setPubField" data-field="type" data-value="donation">
+            💰 公益募捐
+          </view>
+        </view>
+      </view>
+      <view class="form-group">
+        <text class="form-label">标题<text class="required">*</text></text>
+        <input class="form-input" placeholder="活动/公告标题" value="{{pubForm.title}}" bindinput="onPubInput" data-field="title" maxlength="50" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">详细内容<text class="required">*</text></text>
+        <textarea class="form-textarea" placeholder="活动时间、地点、内容详情..." value="{{pubForm.content}}" bindinput="onPubInput" data-field="content" maxlength="2000" style="min-height:250rpx;" />
+      </view>
+    </scroll-view>
+
+    <view class="modal-footer flex-row">
+      <button class="btn-outline flex-1 mr-sm" bindtap="closePublish">取消</button>
+      <button class="btn-primary flex-1 ml-sm" bindtap="doPublish">确认发布</button>
+    </view>
+  </view>
+</view>

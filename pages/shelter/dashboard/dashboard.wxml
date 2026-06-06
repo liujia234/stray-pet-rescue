@@ -1,0 +1,54 @@
+<!-- 救助站数据看板 -->
+<navbar title="数据看板" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 数据概览 -->
+  <view class="stats-section">
+    <view class="stat-card" style="background: linear-gradient(135deg, #FFF0EB, #FFD4A8);">
+      <text class="stat-num-big">{{lostPets.length}}</text>
+      <text class="stat-label-big">寻宠启事</text>
+    </view>
+    <view class="stat-card" style="background: linear-gradient(135deg, #FFF8ED, #FFE4C4);">
+      <text class="stat-num-big">{{foundPets.length}}</text>
+      <text class="stat-label-big">拾宠招领</text>
+    </view>
+    <view class="stat-card" style="background: linear-gradient(135deg, #EDF8EE, #C8E6C9);">
+      <text class="stat-num-big">{{adoptPets.length}}</text>
+      <text class="stat-label-big">待领养</text>
+    </view>
+    <view class="stat-card" style="background: linear-gradient(135deg, #EDF4F8, #B3D9F2);">
+      <text class="stat-num-big">{{activities.length}}</text>
+      <text class="stat-label-big">活动公告</text>
+    </view>
+  </view>
+
+  <!-- Tab 切换 -->
+  <view class="tab-bar-db flex-row">
+    <view class="tab-btn {{dbTab === 'lost' ? 'active' : ''}}" bindtap="switchDbTab" data-tab="lost">
+      寻宠 ({{lostPets.length}})
+    </view>
+    <view class="tab-btn {{dbTab === 'found' ? 'active' : ''}}" bindtap="switchDbTab" data-tab="found">
+      拾宠 ({{foundPets.length}})
+    </view>
+    <view class="tab-btn {{dbTab === 'adopt' ? 'active' : ''}}" bindtap="switchDbTab" data-tab="adopt">
+      领养 ({{adoptPets.length}})
+    </view>
+  </view>
+
+  <!-- 数据列表 -->
+  <view wx:if="{{currentList.length > 0}}">
+    <pet-card
+      wx:for="{{currentList}}"
+      wx:key="id"
+      petData="{{item}}"
+      cardType="{{dbTab}}"
+      showType="{{true}}"
+    />
+  </view>
+  <view wx:else class="empty-state">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">暂无数据</text>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+</scroll-view>

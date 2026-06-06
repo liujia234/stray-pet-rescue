@@ -1,0 +1,106 @@
+<!-- 宠物管理页 -->
+<navbar title="宠物管理" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 顶部操作 -->
+  <view class="manage-header flex-between mb-md">
+    <text class="text-md text-bold">共 {{pets.length}} 只宠物</text>
+    <view class="btn-add-pet flex-row" bindtap="showAddDialog">
+      <text class="add-icon-sm">+</text>
+      <text>新增宠物</text>
+    </view>
+  </view>
+
+  <!-- 宠物列表 -->
+  <view wx:if="{{pets.length > 0}}">
+    <view wx:for="{{pets}}" wx:key="id" class="manage-item card">
+      <pet-card petData="{{item}}" cardType="adopt" showType="{{true}}" showActions="{{false}}" />
+
+      <view class="manage-actions flex-between p-sm">
+        <view class="ma-btn edit" bindtap="editPet" data-id="{{item.id}}">
+          <text>✏️ 编辑</text>
+        </view>
+        <view class="ma-btn {{item.status === 'available' ? 'offline' : 'online'}}" bindtap="toggleStatus" data-id="{{item.id}}" data-status="{{item.status}}">
+          <text>{{item.status === 'available' ? '⬇️ 下架' : '⬆️ 上架'}}</text>
+        </view>
+        <view class="ma-btn delete" bindtap="deletePet" data-id="{{item.id}}">
+          <text>🗑️ 删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="empty-state">
+    <text class="empty-icon">🐾</text>
+    <text class="empty-text">暂无宠物，请添加</text>
+  </view>
+
+  <view style="height: 200rpx;"></view>
+</scroll-view>
+
+<!-- 新增/编辑弹窗（使用页内模拟弹窗） -->
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="">
+    <text class="modal-title">{{editingId ? '编辑宠物信息' : '新增宠物信息'}}</text>
+
+    <scroll-view class="modal-body" scroll-y>
+      <view class="form-group">
+        <text class="form-label">名称<text class="required">*</text></text>
+        <input class="form-input" placeholder="宠物名称" value="{{editForm.name}}" bindinput="onEditInput" data-field="name" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">类型</text>
+        <view class="form-radio-group">
+          <view class="radio-sm {{editForm.petType === 'dog' ? 'active' : ''}}" bindtap="setEditField" data-field="petType" data-value="dog">🐶 狗</view>
+          <view class="radio-sm {{editForm.petType === 'cat' ? 'active' : ''}}" bindtap="setEditField" data-field="petType" data-value="cat">🐱 猫</view>
+        </view>
+      </view>
+      <view class="form-group">
+        <text class="form-label">品种</text>
+        <input class="form-input" placeholder="品种" value="{{editForm.breed}}" bindinput="onEditInput" data-field="breed" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">毛色</text>
+        <input class="form-input" placeholder="毛色" value="{{editForm.color}}" bindinput="onEditInput" data-field="color" />
+      </view>
+      <view class="form-row">
+        <view class="form-group flex-1 mr-sm">
+          <text class="form-label">年龄</text>
+          <input class="form-input" placeholder="年龄" value="{{editForm.age}}" bindinput="onEditInput" data-field="age" />
+        </view>
+        <view class="form-group flex-1 ml-sm">
+          <text class="form-label">体型</text>
+          <picker mode="selector" range="{{sizeOptions}}" bindchange="onSizeChange">
+            <view class="form-input">{{sizeOptions[editForm.sizeIndex || 0]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="form-group">
+        <text class="form-label">性格特征</text>
+        <input class="form-input" placeholder="如：活泼亲人、适合新手..." value="{{editForm.character}}" bindinput="onEditInput" data-field="character" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">健康状态</text>
+        <input class="form-input" placeholder="如：已驱虫、已打疫苗、已绝育..." value="{{editForm.health}}" bindinput="onEditInput" data-field="health" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">详细描述<text class="required">*</text></text>
+        <textarea class="form-textarea" placeholder="宠物的故事和描述..." value="{{editForm.description}}" bindinput="onEditInput" data-field="description" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">地址</text>
+        <input class="form-input" placeholder="救助站地址" value="{{editForm.address}}" bindinput="onEditInput" data-field="address" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">联系电话</text>
+        <input class="form-input" type="number" placeholder="联系电话" value="{{editForm.contact}}" bindinput="onEditInput" data-field="contact" />
+      </view>
+    </scroll-view>
+
+    <view class="modal-footer flex-row">
+      <button class="btn-outline flex-1 mr-sm" bindtap="closeModal">取消</button>
+      <button class="btn-primary flex-1 ml-sm" bindtap="savePet">
+        {{editingId ? '保存修改' : '确认新增'}}
+      </button>
+    </view>
+  </view>
+</view>

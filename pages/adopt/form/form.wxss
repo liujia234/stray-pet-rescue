@@ -1,0 +1,33 @@
+.form-desc {
+  background: linear-gradient(135deg, #FFF8ED, #FFF0EB);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+.form-desc-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.form-desc-text {
+  line-height: 1.6;
+}
+
+.check-item {
+  padding: 14rpx 28rpx;
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  border: 2rpx solid transparent;
+  font-size: var(--font-md);
+  transition: all 0.3s;
+}
+.check-item.active {
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.submit-area {
+  margin-top: var(--spacing-lg);
+}

@@ -1,0 +1,126 @@
+<!-- 上报表单页 -->
+<navbar title="{{isLost ? '发布寻宠启事' : '发布拾宠招领'}}" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 类型切换 -->
+  <view class="tab-switch card">
+    <view class="tab-option {{isLost ? 'active' : ''}}" bindtap="setType" data-type="lost">
+      🐾 家养宠物走失
+    </view>
+    <view class="tab-option {{!isLost ? 'active' : ''}}" bindtap="setType" data-type="found">
+      🤝 捡到流浪动物
+    </view>
+  </view>
+
+  <!-- 表单 -->
+  <view class="card form-card">
+    <!-- 宠物类型 -->
+    <view class="form-group">
+      <text class="form-label">宠物类型<text class="required">*</text></text>
+      <view class="form-radio-group">
+        <view class="radio-item {{form.petType === 'dog' ? 'active' : ''}}" bindtap="setField" data-field="petType" data-value="dog">
+          <text class="radio-icon">🐶</text>
+          <text>狗狗</text>
+        </view>
+        <view class="radio-item {{form.petType === 'cat' ? 'active' : ''}}" bindtap="setField" data-field="petType" data-value="cat">
+          <text class="radio-icon">🐱</text>
+          <text>猫咪</text>
+        </view>
+        <view class="radio-item {{form.petType === 'other' ? 'active' : ''}}" bindtap="setField" data-field="petType" data-value="other">
+          <text class="radio-icon">🐾</text>
+          <text>其他</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 宠物名称 -->
+    <view class="form-group">
+      <text class="form-label">宠物名称<text class="required">*</text></text>
+      <input class="form-input" placeholder="请输入宠物名字或特征描述" value="{{form.name}}" bindinput="onInput" data-field="name" maxlength="20" />
+    </view>
+
+    <!-- 品种 -->
+    <view class="form-group">
+      <text class="form-label">品种</text>
+      <input class="form-input" placeholder="如：金毛、英短、中华田园犬..." value="{{form.breed}}" bindinput="onInput" data-field="breed" maxlength="30" />
+    </view>
+
+    <!-- 毛色 -->
+    <view class="form-group">
+      <text class="form-label">毛色</text>
+      <input class="form-input" placeholder="如：金黄色、黑白双色..." value="{{form.color}}" bindinput="onInput" data-field="color" maxlength="20" />
+    </view>
+
+    <!-- 年龄 & 性别 -->
+    <view class="form-row">
+      <view class="form-group flex-1 mr-sm">
+        <text class="form-label">年龄</text>
+        <input class="form-input" placeholder="如：约1岁" value="{{form.age}}" bindinput="onInput" data-field="age" maxlength="10" />
+      </view>
+      <view class="form-group flex-1 ml-sm">
+        <text class="form-label">性别</text>
+        <view class="form-radio-group">
+          <view class="radio-sm {{form.gender === 'male' ? 'active' : ''}}" bindtap="setField" data-field="gender" data-value="male">♂ 公</view>
+          <view class="radio-sm {{form.gender === 'female' ? 'active' : ''}}" bindtap="setField" data-field="gender" data-value="female">♀ 母</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 受伤情况 -->
+    <view class="form-group">
+      <text class="form-label">受伤情况</text>
+      <input class="form-input" placeholder="如：无明显外伤 / 右后腿轻微跛行..." value="{{form.injury}}" bindinput="onInput" data-field="injury" maxlength="50" />
+    </view>
+
+    <!-- 详细描述 -->
+    <view class="form-group">
+      <text class="form-label">详细描述<text class="required">*</text></text>
+      <textarea class="form-textarea" placeholder="请详细描述宠物的体貌特征、走失/发现经过、性格特点等..." value="{{form.description}}" bindinput="onInput" data-field="description" maxlength="500" />
+      <text class="char-count">{{form.description.length || 0}}/500</text>
+    </view>
+
+    <!-- 地址 -->
+    <view class="form-group">
+      <text class="form-label">地点<text class="required">*</text></text>
+      <view class="address-input-row flex-row">
+        <input class="form-input flex-1" placeholder="点击获取GPS定位或手动输入地址" value="{{form.address}}" bindinput="onInput" data-field="address" />
+        <view class="btn-location" bindtap="getLocation">
+          <text>📍</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 联系电话 -->
+    <view class="form-group">
+      <text class="form-label">联系电话<text class="required">*</text></text>
+      <input class="form-input" type="number" placeholder="请输入您的联系电话" value="{{form.contact}}" bindinput="onInput" data-field="contact" maxlength="11" />
+    </view>
+
+    <!-- 上传图片 -->
+    <view class="form-group">
+      <text class="form-label">宠物照片（最多6张）</text>
+      <view class="image-upload-area">
+        <view wx:for="{{images}}" wx:key="index" class="image-item">
+          <image src="{{item}}" mode="aspectFill" class="uploaded-image" />
+          <view class="image-remove" bindtap="removeImage" data-index="{{index}}">✕</view>
+        </view>
+        <view wx:if="{{images.length < 6}}" class="image-add-btn" bindtap="chooseImage">
+          <text class="add-icon-plus">+</text>
+          <text class="add-label">添加照片</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预览卡片 -->
+  <view class="section-title mt-lg mb-sm">📋 生成卡片预览</view>
+  <pet-card petData="{{previewData}}" cardType="{{isLost ? 'lost' : 'found'}}" showType="{{true}}" placeholderColor="#FFD4A8" />
+  <text class="text-light text-sm text-center" style="display:block;margin-top:8rpx;">提交后将生成标准寻宠/拾宠卡片</text>
+
+  <!-- 提交按钮 -->
+  <view class="submit-area">
+    <button class="btn-primary" bindtap="onSubmit">提交发布</button>
+  </view>
+
+  <view style="height: 160rpx;"></view>
+</scroll-view>

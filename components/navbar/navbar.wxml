@@ -1,0 +1,14 @@
+<!-- 自定义导航栏组件 -->
+<view class="navbar" style="padding-top: {{statusBarHeight}}px;">
+  <view class="navbar-content" style="height: {{navBarHeight}}px;">
+    <view class="navbar-left" wx:if="{{showBack}}" bindtap="onBackTap">
+      <text class="back-icon">‹</text>
+      <text class="back-text">返回</text>
+    </view>
+    <view class="navbar-title">{{title}}</view>
+    <view class="navbar-right">
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>
+<view class="navbar-placeholder" style="height: {{statusBarHeight + navBarHeight}}px;"></view>

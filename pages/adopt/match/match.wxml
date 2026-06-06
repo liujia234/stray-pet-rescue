@@ -1,0 +1,54 @@
+<!-- 领养匹配结果页 -->
+<navbar title="匹配结果" showBack="{{true}}" />
+
+<view class="page-container">
+  <!-- 申请摘要 -->
+  <view class="match-summary card">
+    <text class="summary-title">🎯 匹配条件</text>
+    <view class="summary-tags">
+      <text class="tag tag-primary">{{application.city || '未知城市'}}</text>
+      <text class="tag tag-info">{{application.housingType === 'own' ? '自有住房' : '租房'}}</text>
+      <text class="tag tag-warning">{{application.hasExperience === 'yes' ? '有经验' : '新手'}}</text>
+      <text class="tag tag-primary">{{application.preferType === 'all' ? '不限类型' : application.preferType === 'dog' ? '偏好狗狗' : '偏好猫咪'}}</text>
+      <text class="tag tag-info" wx:if="{{application.preferBreed}}">{{application.preferBreed}}</text>
+    </view>
+  </view>
+
+  <!-- 匹配结果 -->
+  <view class="section-title mt-lg mb-md">
+    <text>共匹配到 {{results.length}} 只萌宠</text>
+  </view>
+
+  <view wx:if="{{results.length > 0}}">
+    <view wx:for="{{results}}" wx:key="petId" class="match-item">
+      <view class="match-score-bar">
+        <view class="score-fill" style="width: {{item.score}}%; background: {{item.score >= 80 ? '#6BCB77' : item.score >= 60 ? '#FFB84D' : '#FF8C6B'}};"></view>
+        <text class="score-label">匹配度 {{item.score}}%</text>
+      </view>
+
+      <pet-card
+        petData="{{item.pet}}"
+        cardType="adopt"
+        showType="{{false}}"
+        showActions="{{true}}"
+      >
+        <view slot="actions" class="card-actions-row flex-between">
+          <view class="action-btn flex-row" catchtap="toggleFav" data-id="{{item.petId}}">
+            <text>{{isFav(item.petId) ? '❤️ 已收藏' : '🤍 收藏'}}</text>
+          </view>
+          <view class="action-btn flex-row" catchtap="goDetail" data-id="{{item.petId}}">
+            <text>查看详情 ›</text>
+          </view>
+        </view>
+      </pet-card>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state">
+    <text class="empty-icon">🔍</text>
+    <text class="empty-text">暂未找到匹配的宠物</text>
+    <text class="text-light text-sm mt-sm">试试放宽条件或稍后再来看看~</text>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+</view>

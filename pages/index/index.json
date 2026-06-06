@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "pet-card": "/components/pet-card/pet-card"
+  },
+  "navigationStyle": "custom"
+}

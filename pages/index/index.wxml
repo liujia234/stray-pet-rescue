@@ -1,0 +1,124 @@
+<!-- 首页 -->
+<navbar title="流浪猫狗寻回领养" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- Banner 区域 -->
+  <view class="hero-banner">
+    <view class="hero-content">
+      <text class="hero-title">给流浪的TA\n一个温暖的家</text>
+      <text class="hero-subtitle">每一次转发 · 都是回家的希望</text>
+    </view>
+    <view class="hero-pets">
+      <text class="hero-pet-icon">🐱</text>
+      <text class="hero-pet-icon">🐶</text>
+      <text class="hero-pet-icon">🐱</text>
+    </view>
+  </view>
+
+  <!-- 功能入口（4大模块） -->
+  <view class="feature-grid">
+    <view class="feature-item" bindtap="goReport">
+      <view class="feature-icon-wrap" style="background: #FFF0EB;">
+        <text class="feature-icon">🔍</text>
+      </view>
+      <text class="feature-title">寻宠上报</text>
+      <text class="feature-desc">发布走失/拾宠信息</text>
+    </view>
+    <view class="feature-item" bindtap="goAdopt">
+      <view class="feature-icon-wrap" style="background: #FFF8ED;">
+        <text class="feature-icon">💕</text>
+      </view>
+      <text class="feature-title">领养匹配</text>
+      <text class="feature-desc">智能匹配心仪宠物</text>
+    </view>
+    <view class="feature-item" bindtap="goShelter">
+      <view class="feature-icon-wrap" style="background: #EDF8EE;">
+        <text class="feature-icon">🏥</text>
+      </view>
+      <text class="feature-title">救助站</text>
+      <text class="feature-desc">机构管理/活动发布</text>
+    </view>
+    <view class="feature-item" bindtap="goAISetup">
+      <view class="feature-icon-wrap" style="background: #EDF4F8;">
+        <text class="feature-icon">🎬</text>
+      </view>
+      <text class="feature-title">AI短视频</text>
+      <text class="feature-desc">一键生成视频素材</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-bar">
+    <view class="stat-item">
+      <text class="stat-num">{{stats.lostCount}}</text>
+      <text class="stat-label">寻宠中</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.foundCount}}</text>
+      <text class="stat-label">已救助</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num">{{stats.adoptCount}}</text>
+      <text class="stat-label">待领养</text>
+    </view>
+  </view>
+
+  <!-- 最新寻宠信息 -->
+  <view class="section">
+    <view class="section-header flex-between">
+      <text class="section-title">🔍 最新寻宠启事</text>
+      <text class="section-more" bindtap="goReport">查看全部 ›</text>
+    </view>
+    <pet-card
+      wx:for="{{latestLost}}"
+      wx:key="id"
+      petData="{{item}}"
+      cardType="lost"
+      showType="{{true}}"
+    />
+    <view wx:if="{{latestLost.length === 0}}" class="empty-state">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无寻宠信息</text>
+    </view>
+  </view>
+
+  <!-- 最新待领养 -->
+  <view class="section">
+    <view class="section-header flex-between">
+      <text class="section-title">💕 待领养萌宠</text>
+      <text class="section-more" bindtap="goAdopt">查看全部 ›</text>
+    </view>
+    <pet-card
+      wx:for="{{latestAdopt}}"
+      wx:key="id"
+      petData="{{item}}"
+      cardType="adopt"
+      showType="{{true}}"
+    />
+    <view wx:if="{{latestAdopt.length === 0}}" class="empty-state">
+      <text class="empty-icon">🐾</text>
+      <text class="empty-text">暂有待领养宠物</text>
+    </view>
+  </view>
+
+  <!-- 最新救助活动 -->
+  <view class="section" wx:if="{{latestActivity}}">
+    <view class="section-header flex-between">
+      <text class="section-title">📢 救助动态</text>
+      <text class="section-more" bindtap="goShelter">更多 ›</text>
+    </view>
+    <view class="activity-card card" bindtap="onActivityTap" data-id="{{latestActivity.id}}">
+      <text class="activity-title">{{latestActivity.title}}</text>
+      <text class="activity-content text-sm text-secondary">{{latestActivity.content.substring(0, 100)}}...</text>
+      <view class="activity-footer flex-between mt-sm">
+        <text class="text-light text-sm">{{latestActivity.shelterName}}</text>
+        <text class="tag tag-warning">{{latestActivity.type === 'activity' ? '线下活动' : '公益募捐'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全距离 -->
+  <view style="height: 120rpx;"></view>
+</scroll-view>

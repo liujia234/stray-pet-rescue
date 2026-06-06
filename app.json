@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/report/index/index",
+    "pages/report/form/form",
+    "pages/adopt/index/index",
+    "pages/adopt/form/form",
+    "pages/adopt/match/match",
+    "pages/detail/detail",
+    "pages/video-gen/video-gen",
+    "pages/shelter/login/login",
+    "pages/shelter/dashboard/dashboard",
+    "pages/shelter/manage/manage",
+    "pages/shelter/activity/activity"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF8C6B",
+    "navigationBarTitleText": "流浪猫狗寻回领养",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFF5F0"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#FF8C6B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "icon": "🏠"
+      },
+      {
+        "pagePath": "pages/report/index/index",
+        "text": "寻宠",
+        "icon": "🔍"
+      },
+      {
+        "pagePath": "pages/adopt/index/index",
+        "text": "领养",
+        "icon": "💕"
+      },
+      {
+        "pagePath": "pages/shelter/login/login",
+        "text": "救助站",
+        "icon": "🏥"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于上报流浪动物发现地点，方便快速救助"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {}
+}

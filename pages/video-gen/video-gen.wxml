@@ -1,0 +1,112 @@
+<!-- AI 短视频素材生成页 -->
+<navbar title="短视频素材生成" showBack="{{true}}" />
+
+<scroll-view class="page-container" scroll-y enhanced show-scrollbar="{{false}}">
+  <!-- 生成状态 -->
+  <view class="gen-status card" wx:if="{{generating}}">
+    <view class="loading-area">
+      <text class="loading-icon">🎬</text>
+      <text class="loading-text">{{loadingText}}</text>
+    </view>
+  </view>
+
+  <!-- 生成结果（非加载状态显示） -->
+  <view wx:if="{{!generating && result}}">
+    <!-- 数据来源标记 -->
+    <view class="source-badge">
+      <text class="tag {{result._source === 'ai' ? 'tag-success' : 'tag-warning'}}">
+        {{result._source === 'ai' ? '🤖 AI智能生成' : '📋 模板生成（AI未配置或调用失败）'}}
+      </text>
+    </view>
+
+    <!-- Tab 切换：温情文案 / 科普文案 -->
+    <view class="content-tabs card">
+      <view class="tab-header flex-row">
+        <view class="tab-btn {{activeTab === 'warm' ? 'active' : ''}}" bindtap="switchTab" data-tab="warm">
+          温情文案
+        </view>
+        <view class="tab-btn {{activeTab === 'science' ? 'active' : ''}}" bindtap="switchTab" data-tab="science">
+          {{textType === 'search' ? '寻宠科普' : '领养科普'}}
+        </view>
+      </view>
+
+      <!-- 文案内容 -->
+      <view class="tab-content">
+        <text class="script-text">{{activeTab === 'warm' ? result.warmScript : result.scienceScript}}</text>
+        <view class="copy-btn" bindtap="copyText" data-text="{{activeTab === 'warm' ? result.warmScript : result.scienceScript}}">
+          <text>📋 复制文案</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分镜描述 -->
+    <view class="storyboard-section card mt-md">
+      <text class="section-label">🎥 分镜描述</text>
+      <view wx:for="{{result.storyboard}}" wx:key="index" class="storyboard-item">
+        <text class="sb-text">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 平台标题 -->
+    <view class="titles-section card mt-md">
+      <text class="section-label">📱 平台标题</text>
+
+      <view class="title-item">
+        <view class="flex-between mb-sm">
+          <text class="title-platform">🎵 抖音标题</text>
+          <view class="copy-btn-sm" bindtap="copyText" data-text="{{result.douyinTitle}}">复制</view>
+        </view>
+        <text class="title-text">{{result.douyinTitle}}</text>
+      </view>
+
+      <view class="title-item mt-md">
+        <view class="flex-between mb-sm">
+          <text class="title-platform">📕 小红书标题</text>
+          <view class="copy-btn-sm" bindtap="copyText" data-text="{{result.xiaohongshuTitle}}">复制</view>
+        </view>
+        <text class="title-text">{{result.xiaohongshuTitle}}</text>
+      </view>
+    </view>
+
+    <!-- 话题标签 -->
+    <view class="hashtags-section card mt-md">
+      <text class="section-label">#️⃣ 话题标签</text>
+      <view class="hashtags-wrap flex-row flex-wrap">
+        <text wx:for="{{result.hashtags}}" wx:key="index" class="tag tag-primary">{{item}}</text>
+      </view>
+      <view class="copy-btn mt-sm" bindtap="copyText" data-text="{{hashtagsStr}}">
+        <text>📋 一键复制全部标签</text>
+      </view>
+    </view>
+
+    <!-- 排版建议 & BGM -->
+    <view class="tips-section card mt-md">
+      <text class="section-label">🎨 排版建议</text>
+      <text class="tip-text">{{result.layoutTip}}</text>
+
+      <view class="divider"></view>
+
+      <text class="section-label">🎵 背景音乐推荐</text>
+      <text class="tip-text">{{result.bgmTip}}</text>
+    </view>
+
+    <!-- 一键复制全部 -->
+    <view class="export-section mt-lg">
+      <button class="btn-primary" bindtap="copyAll">
+        📋 一键复制全部素材
+      </button>
+      <text class="export-hint text-light text-sm text-center mt-sm" style="display:block;">
+        复制后可直接粘贴到剪映/必剪/CapCut 等剪辑软件中使用
+      </text>
+    </view>
+  </view>
+
+  <!-- 错误提示 -->
+  <view wx:if="{{!generating && !result && errorMsg}}" class="error-state empty-state">
+    <text class="empty-icon">😢</text>
+    <text class="empty-text">{{errorMsg}}</text>
+    <view class="btn-outline mt-md" bindtap="retryGenerate" style="width: 300rpx;">重新生成</view>
+  </view>
+
+  <view style="height: 160rpx;"></view>
+</scroll-view>
