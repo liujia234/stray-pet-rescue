@@ -47,6 +47,10 @@ Page({
     this.setData({ showPublishModal: false })
   },
 
+  preventBubble() {
+    // 阻止冒泡
+  },
+
   setPubField(e) {
     const { field, value } = e.currentTarget.dataset
     this.setData({ ['pubForm.' + field]: value })

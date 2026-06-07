@@ -42,7 +42,7 @@
 
 <!-- 发布弹窗 -->
 <view class="modal-mask" wx:if="{{showPublishModal}}" bindtap="closePublish">
-  <view class="modal-content" catchtap="">
+  <view class="modal-content" catchtap="preventBubble">
     <text class="modal-title">发布新公告</text>
 
     <scroll-view class="modal-body" scroll-y>

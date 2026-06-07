@@ -39,7 +39,7 @@
 
 <!-- 新增/编辑弹窗（使用页内模拟弹窗） -->
 <view class="modal-mask" wx:if="{{showModal}}" bindtap="closeModal">
-  <view class="modal-content" catchtap="">
+  <view class="modal-content" catchtap="preventBubble">
     <text class="modal-title">{{editingId ? '编辑宠物信息' : '新增宠物信息'}}</text>
 
     <scroll-view class="modal-body" scroll-y>

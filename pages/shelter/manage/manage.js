@@ -107,6 +107,10 @@ Page({
     this.setData({ showModal: false })
   },
 
+  preventBubble() {
+    // 阻止冒泡
+  },
+
   savePet() {
     const form = this.data.editForm
     if (!form.name.trim()) return util.showToast('请输入名称')
