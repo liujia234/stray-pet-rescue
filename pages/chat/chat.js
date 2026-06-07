@@ -92,6 +92,9 @@ Page({
   closeConfig() {
     this.setData({ showConfigModal: false })
   },
+  preventBubble() {
+    // 阻止冒泡，不做任何事（防止点击弹窗内容时关闭）
+  },
   onConfigInput(e) {
     const field = e.currentTarget.dataset.field
     this.setData({ [field]: e.detail.value })

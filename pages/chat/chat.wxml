@@ -69,17 +69,17 @@
 
 <!-- 配置弹窗 -->
 <view class="modal-mask" wx:if="{{showConfigModal}}" bindtap="closeConfig">
-  <view class="config-modal" catchtap="">
+  <view class="config-modal" catchtap="preventBubble">
     <text class="config-title">⚙️ 配置 Coze Bot</text>
     <text class="config-desc text-sm text-secondary">在 coze.cn 创建 Bot 后，在 Bot 设置 → API 中获取以下信息</text>
 
     <view class="form-group">
       <text class="form-label">Bot ID</text>
-      <input class="form-input" placeholder="输入 Bot ID" value="{{botId}}" bindinput="onConfigInput" data-field="botId" />
+      <input class="form-input" placeholder="输入 Bot ID" value="{{botId}}" bindinput="onConfigInput" data-field="botId" adjust-position="{{true}}" />
     </view>
     <view class="form-group">
       <text class="form-label">API Key</text>
-      <input class="form-input" placeholder="输入 API Key" value="{{apiKey}}" bindinput="onConfigInput" data-field="apiKey" />
+      <input class="form-input" placeholder="输入 API Key" value="{{apiKey}}" bindinput="onConfigInput" data-field="apiKey" adjust-position="{{true}}" />
     </view>
 
     <text class="text-light text-sm mt-sm mb-md" style="display:block;">
