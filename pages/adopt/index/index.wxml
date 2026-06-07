@@ -47,6 +47,20 @@
     </view>
   </view>
 
+  <!-- Coze AI 对话匹配入口 -->
+  <view class="coze-entry card" bindtap="goChatBot">
+    <view class="flex-between">
+      <view class="flex-row">
+        <text class="coze-icon">🤖</text>
+        <view>
+          <text class="text-md text-bold">AI 智能对话匹配</text>
+          <text class="text-sm text-secondary" style="display:block;margin-top:4rpx;">像聊天一样描述需求，AI 帮你找到最合适的毛孩子</text>
+        </view>
+      </view>
+      <text class="coze-arrow">›</text>
+    </view>
+  </view>
+
   <!-- 列表 -->
   <pet-card
     wx:for="{{filteredList}}"

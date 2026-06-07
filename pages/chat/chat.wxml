@@ -1,0 +1,94 @@
+<!-- Coze AI 对话匹配页 -->
+<navbar title="🤖 AI 领养助手" showBack="{{true}}" />
+
+<view class="chat-container">
+  <!-- 聊天消息区 -->
+  <scroll-view class="chat-messages" scroll-y enhanced show-scrollbar="{{false}}" scroll-into-view="{{scrollToView}}">
+    <!-- 欢迎消息 -->
+    <view class="chat-bubble assistant">
+      <view class="bubble-avatar">🤖</view>
+      <view class="bubble-content">
+        <text class="bubble-text">嗨！我是领养助手小爪 🐾</text>
+        <text class="bubble-text">告诉我你的情况，我帮你找到最合适的毛孩子～</text>
+        <text class="bubble-text text-sm text-light mt-sm">比如："我在北京租房，想养一只安静的猫"</text>
+      </view>
+    </view>
+
+    <!-- 对话消息列表 -->
+    <view wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}" class="chat-bubble {{item.role}}">
+      <view class="bubble-avatar">{{item.role === 'user' ? '👤' : '🤖'}}</view>
+      <view class="bubble-content">
+        <text class="bubble-text" wx:if="{{item.role === 'user'}}">{{item.content}}</text>
+        <text class="bubble-text" wx:if="{{item.role === 'assistant'}}" style="white-space:pre-line;">{{item.content}}</text>
+      </view>
+    </view>
+
+    <!-- 加载中 -->
+    <view class="chat-bubble assistant" wx:if="{{loading}}">
+      <view class="bubble-avatar">🤖</view>
+      <view class="bubble-content typing">
+        <text class="typing-dot">●</text>
+        <text class="typing-dot">●</text>
+        <text class="typing-dot">●</text>
+      </view>
+    </view>
+
+    <view id="msg-bottom" style="height:20rpx;"></view>
+  </scroll-view>
+
+  <!-- 快捷标签 -->
+  <view class="quick-tags" wx:if="{{messages.length <= 1}}">
+    <text class="q-tag" bindtap="sendQuick" data-text="我在北京租房，想领养一只安静的猫咪">🐱 租房养猫推荐</text>
+    <text class="q-tag" bindtap="sendQuick" data-text="我住自己的房子，有大院子，想养狗">🐶 有院子养狗推荐</text>
+    <text class="q-tag" bindtap="sendQuick" data-text="我是新手，帮我推荐容易养的宠物">🌱 新手友好推荐</text>
+  </view>
+
+  <!-- 输入区 -->
+  <view class="chat-input-area safe-bottom">
+    <view class="chat-input-row">
+      <input
+        class="chat-input"
+        placeholder="输入你的领养需求..."
+        value="{{inputText}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendMessage"
+        disabled="{{loading}}"
+      />
+      <view class="send-btn {{inputText ? 'active' : ''}}" bindtap="sendMessage">
+        <text>发送</text>
+      </view>
+    </view>
+
+    <!-- 配置入口 -->
+    <view class="config-tip" wx:if="{{!configured}}" bindtap="showConfig">
+      <text>⚙️ 点击配置 Coze Bot，开启 AI 对话匹配</text>
+    </view>
+  </view>
+</view>
+
+<!-- 配置弹窗 -->
+<view class="modal-mask" wx:if="{{showConfigModal}}" bindtap="closeConfig">
+  <view class="config-modal" catchtap="">
+    <text class="config-title">⚙️ 配置 Coze Bot</text>
+    <text class="config-desc text-sm text-secondary">在 coze.cn 创建 Bot 后，在 Bot 设置 → API 中获取以下信息</text>
+
+    <view class="form-group">
+      <text class="form-label">Bot ID</text>
+      <input class="form-input" placeholder="输入 Bot ID" value="{{botId}}" bindinput="onConfigInput" data-field="botId" />
+    </view>
+    <view class="form-group">
+      <text class="form-label">API Key</text>
+      <input class="form-input" placeholder="输入 API Key" value="{{apiKey}}" bindinput="onConfigInput" data-field="apiKey" />
+    </view>
+
+    <text class="text-light text-sm mt-sm mb-md" style="display:block;">
+      💡 获取方式：coze.cn → 你的Bot → 发布 → API 选项卡 → 查看 Bot ID 和 API Key
+    </text>
+
+    <view class="flex-row">
+      <button class="btn-outline flex-1 mr-sm" bindtap="closeConfig">取消</button>
+      <button class="btn-primary flex-1 ml-sm" bindtap="saveConfig">保存配置</button>
+    </view>
+  </view>
+</view>

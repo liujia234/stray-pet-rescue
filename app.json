@@ -11,7 +11,8 @@
     "pages/shelter/login/login",
     "pages/shelter/dashboard/dashboard",
     "pages/shelter/manage/manage",
-    "pages/shelter/activity/activity"
+    "pages/shelter/activity/activity",
+    "pages/chat/chat"
   ],
   "window": {
     "backgroundTextStyle": "light",

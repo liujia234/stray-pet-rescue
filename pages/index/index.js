@@ -48,18 +48,14 @@ Page({
 
   // 跳转 AI 设置
   goAISetup() {
-    wx.showModal({
-      title: 'AI 短视频生成',
-      content: '请在任意宠物详情页中点击「生成短视频素材」按钮使用此功能。\n\n如需使用 AI 智能生成，请先配置 DeepSeek API Key。',
-      showCancel: true,
-      cancelText: '稍后再说',
-      confirmText: '去配置',
-      success(res) {
-        if (res.confirm) {
-          // 跳转到领养页，那里有设置入口
-          wx.switchTab({ url: '/pages/adopt/index/index' })
-        }
-      }
+    wx.navigateTo({
+      url: '/pages/chat/chat'
+    })
+  },
+
+  goChatBot() {
+    wx.navigateTo({
+      url: '/pages/chat/chat'
     })
   },
 

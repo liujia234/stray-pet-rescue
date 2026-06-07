@@ -113,6 +113,12 @@ Page({
     })
   },
 
+  goChatBot() {
+    wx.navigateTo({
+      url: '/pages/chat/chat'
+    })
+  },
+
   // 测试 API Key
   testApiKey() {
     util.showLoading('正在测试连接...')

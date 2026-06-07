@@ -96,6 +96,23 @@
   color: var(--color-primary);
 }
 
+/* Coze 入口 */
+.coze-entry {
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, #F0F0FF, #FFF0EB);
+  border: 2rpx solid #E0D8FF;
+  margin-bottom: var(--spacing-md);
+}
+.coze-icon {
+  font-size: 48rpx;
+  margin-right: var(--spacing-sm);
+}
+.coze-arrow {
+  font-size: 40rpx;
+  color: var(--color-primary);
+  font-weight: 300;
+}
+
 /* API Key 卡片 */
 .api-key-card {
   padding: var(--spacing-md);
