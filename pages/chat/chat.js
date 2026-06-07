@@ -70,7 +70,12 @@ Page({
         scrollToView: 'msg-' + botMsg.id
       })
     } catch (err) {
-      util.showToast(err.message || '发送失败')
+      // 用弹窗展示详细错误，方便排查
+      wx.showModal({
+        title: '发送失败',
+        content: err.message || '未知错误',
+        showCancel: false
+      })
       // 删除发送失败的用户消息
       this.setData({
         messages: this.data.messages.filter(m => m.id !== userMsg.id),

@@ -1,11 +1,12 @@
 /**
  * Coze API 调用封装
  * 用于小程序与 Coze Bot 的对话联动
+ * API 文档: https://www.coze.cn/docs/developer_guides/chat_v3
  */
 
 const API_CONFIG = {
   baseUrl: 'https://api.coze.cn',
-  version: 'v1'
+  version: 'v3'
 }
 
 /**
@@ -48,8 +49,8 @@ function sendMessage(message, chatHistory = []) {
       return
     }
 
-    // 构建上下文消息
-    const messages = buildMessages(message, chatHistory)
+    // 构建消息列表（Coze v3 API 使用 additional_messages）
+    const additionalMessages = buildMessages(message, chatHistory)
 
     wx.request({
       url: `${API_CONFIG.baseUrl}/${API_CONFIG.version}/chat`,
@@ -62,44 +63,67 @@ function sendMessage(message, chatHistory = []) {
       data: {
         bot_id: config.botId,
         user_id: 'mini_program_user',
-        query: message,
         stream: false,
-        chat_history: messages
+        auto_save_history: true,
+        additional_messages: additionalMessages
       },
       success(res) {
+        console.log('Coze API 响应状态:', res.statusCode)
+        console.log('Coze API 响应数据:', JSON.stringify(res.data))
+
         if (res.statusCode === 200 && res.data) {
           const data = res.data
-          // Coze API 返回的消息在 messages 数组中
-          const reply = data.messages
-            ? data.messages.filter(m => m.role === 'assistant').map(m => m.content).join('\n')
-            : (data.content || data.msg || JSON.stringify(data))
+          // Coze v3 API 返回格式
+          let reply = ''
+          if (data.messages && Array.isArray(data.messages)) {
+            reply = data.messages
+              .filter(m => m.role === 'assistant' && m.type === 'answer')
+              .map(m => m.content)
+              .join('\n')
+          }
+          if (!reply && data.content) {
+            reply = data.content
+          }
+          if (!reply && data.msg) {
+            reply = data.msg
+          }
 
-          resolve({
-            reply: reply,
-            raw: data,
-            conversationId: data.conversation_id || ''
-          })
-        } else if (res.statusCode === 401) {
-          reject(new Error('Coze API Key 无效'))
+          if (reply) {
+            resolve({
+              reply: reply,
+              raw: data,
+              conversationId: data.conversation_id || ''
+            })
+          } else {
+            // 可能是异步任务，需要轮询
+            reject(new Error('Coze 返回数据格式异常，请检查 Bot ID 是否正确'))
+          }
+        } else if (res.statusCode === 401 || res.statusCode === 403) {
+          reject(new Error('API Key 无效或未授权，请检查'))
+        } else if (res.statusCode === 404) {
+          reject(new Error('Bot 不存在，请检查 Bot ID'))
+        } else if (res.statusCode === 429) {
+          reject(new Error('请求太频繁，请稍后再试'))
         } else {
-          reject(new Error(`请求失败 (${res.statusCode}): ${JSON.stringify(res.data)}`))
+          const errMsg = res.data && res.data.msg ? res.data.msg : JSON.stringify(res.data || {})
+          reject(new Error(`请求失败(${res.statusCode}): ${errMsg}`))
         }
       },
       fail(err) {
-        reject(new Error('网络请求失败: ' + (err.errMsg || '未知错误')))
+        console.error('Coze 网络请求失败:', err)
+        reject(new Error('网络请求失败: ' + (err.errMsg || '未知错误') + '\n\n请确认:\n1. 开发者工具勾选「不校验合法域名」\n2. 网络连接正常'))
       }
     })
   })
 }
 
 /**
- * 构建对话消息历史
+ * 构建对话消息
  */
 function buildMessages(currentMsg, history) {
-  // Coze API 只需要传最近几轮对话
   const recentHistory = history.slice(-6)
   const messages = recentHistory.map(h => ({
-    role: h.role,       // 'user' | 'assistant'
+    role: h.role,
     content: h.content,
     content_type: 'text'
   }))
